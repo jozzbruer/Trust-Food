@@ -15,3 +15,33 @@
 .header{
   color: white;
 }
+
+#wrapper{
+  display: flex;
+}
+.map{
+  width: 70vw;
+  height: 85vh;
+  background: red;
+  color: white;
+}
+
+.reviews{
+  width: 28vw;
+  height: 85vh;
+  background: blue;
+  margin-left: 1rem;
+  color: white;
+}
+
+/*
+ Small device 
+ */
+
+ @media (max-width: 700px) {
+  .App{
+    background:red ;
+    width: 100vw;
+    height: 100vh;
+  }
+ } 

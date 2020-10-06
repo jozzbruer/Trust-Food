@@ -1,23 +1,26 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar } from 'react-bootstrap'
 import './App.css';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <header className='header'>
-        <Navbar variant="dark">
-          <Navbar.Brand href="#home">TRUE FOOD</Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Filter Here
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Navbar>
-      </header>
-    </div>
+    <>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route path='/' />
+          </Switch>
+      </Router>
+      {/* <div id="wrapper" className='container-fluid'>
+        <div className='map'>
+        <h1>Map Box</h1>
+        </div>
+        <div className='reviews'>
+            <h1>Reviews Box</h1>
+        </div>
+      </div> */}
+    </>
   );
 }
 
