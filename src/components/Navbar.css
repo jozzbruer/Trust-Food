@@ -23,7 +23,7 @@
 
  @media all and (max-width: 426px){
     .navbar{
-        min-height: 40vh;
+        min-height: 20vh;
         background: #2F303A;
      }
     .logo-image{

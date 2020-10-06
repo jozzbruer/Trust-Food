@@ -4,20 +4,15 @@
   box-sizing: border-box;
 }
 
-.App{
-  background:#2F303A ;
-  width: 100vw;
-  height: 100vh;
-}
-.logo{
-  color:white;
-}
-.header{
-  color: white;
-}
+/* body{
+  background: #2F303A;
+} */
 
-#wrapper{
+
+.wrapper{
   display: flex;
+  justify-content: space-around;
+
 }
 .map{
   width: 70vw;
@@ -30,7 +25,7 @@
   width: 28vw;
   height: 85vh;
   background: blue;
-  margin-left: 1rem;
+/* margin-left: 1rem; */
   color: white;
 }
 
@@ -38,10 +33,22 @@
  Small device 
  */
 
- @media (max-width: 700px) {
-  .App{
-    background:red ;
-    width: 100vw;
-    height: 100vh;
+ @media all and (max-width: 426px){
+  .wrapper{
+    display: block;
   }
- } 
+  .map{
+    width: 100vw;
+    height: 85vh;
+    background: red;
+    color: white;
+  }
+  
+  .reviews{
+    width: 100vw;
+    height: 85vh;
+    background: blue;
+  /* margin-left: 1rem; */
+    color: white;
+  }
+}

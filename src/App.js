@@ -6,20 +6,20 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 function App() {
   return (
     <>
-        <Router>
-          <Navbar />
-          <Switch>
-            <Route path='/' />
-          </Switch>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path='/' />
+        </Switch>
       </Router>
-      {/* <div id="wrapper" className='container-fluid'>
+      <div className='wrapper'>
         <div className='map'>
         <h1>Map Box</h1>
         </div>
         <div className='reviews'>
             <h1>Reviews Box</h1>
         </div>
-      </div> */}
+      </div>
     </>
   );
 }
