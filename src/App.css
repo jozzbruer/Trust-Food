@@ -8,23 +8,26 @@ body{
   background: #2F303A;
 }
 
-
+.center {
+  margin: auto;
+  width:87%;
+  padding-top: 10px;
+}
 .wrapper{
   display: flex;
   justify-content: space-around;
-
 }
 .map{
   width: 70vw;
-  height: 85vh;
+  min-height: 85vh;
   background: red;
   color: white;
 }
 
 .reviews{
   width: 28vw;
-  height: 85vh;
-  background: blue;
+  min-height: 85vh;
+  background: #202027;
 /* margin-left: 1rem; */
   color: white;
 }
@@ -50,10 +53,8 @@ body{
   
   .reviews{
     width: 100vw;
-    height: 100vh;
-    background: blue;
+    min-height: 100vh;
   /* margin-left: 1rem; */
-    
     color: white;
   }
   .display{
@@ -105,11 +106,11 @@ body{
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color:  #202027;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #202027;
 }
 
 input:checked + .slider:before {

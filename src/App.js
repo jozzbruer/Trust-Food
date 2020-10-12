@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Reviews from './components/Reviews'
 
 function App() {
   const [isMobile, setIsMobile] = useState(false)
@@ -36,8 +37,12 @@ function App() {
         <div className={`map ${review ? 'display' : ''}`}>
         <h1>Map Box</h1>
         </div>
-        <div className={`reviews ${review ? '' : 'display'}`}>
-            <h1>Reviews Box</h1>
+        <div className={`center reviews ${review ? '' : 'display'}`}>
+            <Reviews />
+            <Reviews />
+            <Reviews />
+            <Reviews />
+            <Reviews />
         </div>
       </div>
     </>
