@@ -1,11 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+import StylesMap from '../StylesMap'
 
 const libraries = ['places']
 
 const mapContainerStyle = {
     width: '70vw',
     minHeight: '85vh'
+}
+
+const options = {
+    styles: StylesMap,
+    disableDefaultUI: true,
 }
 
 function MapComponent() {
@@ -34,7 +40,14 @@ function MapComponent() {
         return 'Loading Maps'
     return (
         <div className='map'>
-            <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center}></GoogleMap>
+            <GoogleMap 
+             mapContainerStyle={mapContainerStyle}
+             zoom={15}
+             center={center} 
+             options={options}
+             >
+                 <Marker position={{ lat: latitude, lng: longitude }} />
+             </GoogleMap>
         </div>
     )
 }
