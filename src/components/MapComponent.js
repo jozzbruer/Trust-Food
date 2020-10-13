@@ -10,7 +10,7 @@ const mapContainerStyle = {
 }
 
 const options = {
-    styles: StylesMap,
+    styles: StylesMap.map,
     disableDefaultUI: true,
 }
 
@@ -30,7 +30,7 @@ function MapComponent() {
         lng: longitude
     }
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_GOOGLE_API,
+        googleMapsApiKey: 'AIzaSyC-OBwan3Pofu2RkGclRN0n2wrcfQmBz6Q',
         libraries,
     })
 
@@ -39,7 +39,7 @@ function MapComponent() {
     if (!isLoaded)
         return 'Loading Maps'
     return (
-        <div className='map'>
+        <div>
             <GoogleMap 
              mapContainerStyle={mapContainerStyle}
              zoom={15}

@@ -1,4 +1,4 @@
-export default [
+const map = [
     {
         "featureType": "all",
         "elementType": "labels",
@@ -261,3 +261,5 @@ export default [
         ]
     }
 ]
+
+export default { map }
