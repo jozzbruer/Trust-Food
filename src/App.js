@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Reviews from './components/Reviews'
+import MapComponent from './components/MapComponent';
 
 function App() {
   const [isMobile, setIsMobile] = useState(false)
@@ -35,7 +36,7 @@ function App() {
       
       <div className='wrapper'>
         <div className={`map ${review ? 'display' : ''}`}>
-        <h1>Map Box</h1>
+          <MapComponent />
         </div>
         <div className={`center reviews ${review ? '' : 'display'}`}>
             <Reviews />
@@ -45,6 +46,7 @@ function App() {
             <Reviews />
         </div>
       </div>
+     
     </>
   );
 }

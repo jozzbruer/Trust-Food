@@ -20,14 +20,14 @@ body{
 .map{
   width: 70vw;
   min-height: 85vh;
-  background: red;
   color: white;
 }
 
 .reviews{
   width: 28vw;
-  min-height: 85vh;
+  height: 85vh;
   background: #202027;
+  overflow: scroll;
 /* margin-left: 1rem; */
   color: white;
 }
@@ -47,7 +47,6 @@ body{
   .map{
     width: 100vw;
     height: 100vh;
-    background: red;
     color: white;
   }
   
