@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+import Resto from '../data/restaurantData'
 import StylesMap from '../StylesMap'
+import Reviews from './Reviews'
+import './../App.css'
 
 const libraries = ['places']
+
 
 const mapContainerStyle = {
     width: '70vw',
@@ -17,12 +21,28 @@ const options = {
 function MapComponent() {
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
+    const [isMobile, setIsMobile] = useState(false)
+  const [review, setReview] = useState(false)
+
+  useEffect(()=>{
+    // window.addEventListener("resize", () => {
+      const ismobile = window.innerWidth <= 425;
+      if (ismobile) setIsMobile(!isMobile);
+  // }, true);
+  }, [])
+
+  function handleSwich(){
+    setReview(!review)
+  }
+    
+    const RestaurantMarker = Resto .map(item =>  <Marker key={item.id} position={{ lat: item.lat, lng: item.long }} />)
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(function(position) {
             setLatitude(position.coords.latitude)
             setLongitude(position.coords.longitude)
           });
+     
     })
     
     const center = {
@@ -39,16 +59,35 @@ function MapComponent() {
     if (!isLoaded)
         return 'Loading Maps'
     return (
-        <div>
-            <GoogleMap 
+        <>
+        <div className={`${isMobile ? "" : "displayButton"}`}>
+        <label onChange={handleSwich} className="switch">
+        <input type="checkbox" />
+        <span className="slider round"></span>
+      </label>
+       </div>
+      
+      <div className='wrapper'>
+        <div className={`map ${review ? 'display' : ''}`}>
+        <GoogleMap 
              mapContainerStyle={mapContainerStyle}
              zoom={15}
              center={center} 
-             options={options}
-             >
+             options={options} >
                  <Marker position={{ lat: latitude, lng: longitude }} />
+                 
+                 { RestaurantMarker }
              </GoogleMap>
         </div>
+        <div className={`center reviews ${review ? '' : 'display'}`}>
+            <Reviews />
+            <Reviews />
+            <Reviews />
+            <Reviews />
+            <Reviews />
+        </div>
+      </div>
+    </>
     )
 }
 

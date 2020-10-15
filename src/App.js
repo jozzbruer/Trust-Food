@@ -1,24 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Reviews from './components/Reviews'
 import MapComponent from './components/MapComponent';
 
 function App() {
-  const [isMobile, setIsMobile] = useState(false)
-  const [review, setReview] = useState(false)
-
-  useEffect(()=>{
-    // window.addEventListener("resize", () => {
-      const ismobile = window.innerWidth <= 425;
-      if (ismobile) setIsMobile(!isMobile);
-  // }, true);
-  }, [])
-
-  function handleSwich(){
-    setReview(!review)
-  }
+  
   return (
     <>
       <Router>
@@ -27,26 +14,7 @@ function App() {
           <Route path='/' />
         </Switch>
       </Router>
-      <div className={`${isMobile ? "" : "displayButton"}`}>
-        <label onChange={handleSwich} className="switch">
-        <input type="checkbox" />
-        <span className="slider round"></span>
-      </label>
-       </div>
-      
-      <div className='wrapper'>
-        <div className={`map ${review ? 'display' : ''}`}>
-          <MapComponent />
-        </div>
-        <div className={`center reviews ${review ? '' : 'display'}`}>
-            <Reviews />
-            <Reviews />
-            <Reviews />
-            <Reviews />
-            <Reviews />
-        </div>
-      </div>
-     
+     <MapComponent />
     </>
   );
 }
