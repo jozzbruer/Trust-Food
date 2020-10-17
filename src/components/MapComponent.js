@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
 import Resto from '../data/restaurantData'
 import StylesMap from '../StylesMap'
@@ -22,7 +22,9 @@ function MapComponent() {
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
     const [isMobile, setIsMobile] = useState(false)
-  const [review, setReview] = useState(false)
+    const [review, setReview] = useState(false)
+    //State to check if the marker is selected or not
+    const [selectedMaker, setSelectedMarker] = useState(null)
 
   useEffect(()=>{
     // window.addEventListener("resize", () => {
@@ -30,12 +32,14 @@ function MapComponent() {
       if (ismobile) setIsMobile(!isMobile);
   // }, true);
   }, [])
+  
+  // const onMapClick = useCallback(e =>{
+
+  // }, [])
 
   function handleSwich(){
     setReview(!review)
   }
-    
-    const RestaurantMarker = Resto .map(item =>  <Marker key={item.id} position={{ lat: item.lat, lng: item.long }} />)
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -76,15 +80,33 @@ function MapComponent() {
              options={options} >
                  <Marker position={{ lat: latitude, lng: longitude }} />
                  
-                 { RestaurantMarker }
+                 { Resto.map(item =>
+                    <Marker 
+                      key={item.id} 
+                      position={{ lat: item.lat, lng: item.long }}
+                      icon={{
+                        url: '/resto.svg',
+                        scaledSize: new window.google.maps.Size(30,30),
+                        origin: new window.google.maps.Point(0,0),
+                        anchor: new window.google.maps.Point(15,15)
+
+                      }}
+                      onClick={()=>{
+                        setSelectedMarker(item)
+                      }}
+                      />) 
+                  }
+                 {selectedMaker ? console.log(selectedMaker.lat): null}
+
+                 
              </GoogleMap>
         </div>
         <div className={`center reviews ${review ? '' : 'display'}`}>
-            <Reviews />
-            <Reviews />
-            <Reviews />
-            <Reviews />
-            <Reviews />
+            {
+              Resto.map(item => 
+                <Reviews key={item.id} name={item.restaurantName} address={item.address} />
+              )
+            }
         </div>
       </div>
     </>

@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Reviews() {
+function Reviews(props) {
     const classes = useStyles();
 
     return (
@@ -23,7 +23,10 @@ function Reviews() {
             <CardActionArea>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Restaurant Name
+                       {props.name}
+                    </Typography>
+                    <Typography gutterBottom variant="body1" component="h6">
+                       {props.address}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
                         < ImStarEmpty />
@@ -31,10 +34,6 @@ function Reviews() {
                         < ImStarEmpty />
                         < ImStarEmpty />
                         < ImStarEmpty />
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
                     </Typography>
                 </CardContent>
             </CardActionArea>`
