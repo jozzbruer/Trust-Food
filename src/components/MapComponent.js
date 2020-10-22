@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
 import Resto from '../data/restaurantData'
+import token from '../token'
 import StylesMap from '../StylesMap'
 import Reviews from './Reviews'
 import './../App.css'
@@ -55,7 +56,7 @@ function MapComponent() {
         lng: longitude
     }
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyC-OBwan3Pofu2RkGclRN0n2wrcfQmBz6Q',
+        googleMapsApiKey: token,
         libraries,
     })
 
