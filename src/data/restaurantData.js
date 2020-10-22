@@ -82,6 +82,7 @@ const Resto = [
               "stars":3,
               "comment":"Yeeeeee! Free WiFi"
            }
+           
         ]
      }
      ,{

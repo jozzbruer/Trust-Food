@@ -1,9 +1,10 @@
-import React, {useState, useEffect, useCallback} from 'react'
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+import React, {useState, useEffect} from 'react'
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
 import Resto from '../data/restaurantData'
 import StylesMap from '../StylesMap'
 import Reviews from './Reviews'
 import './../App.css'
+import MarkerItem from './MarkerItem'
 
 const libraries = ['places']
 
@@ -24,7 +25,7 @@ function MapComponent() {
     const [isMobile, setIsMobile] = useState(false)
     const [review, setReview] = useState(false)
     //State to check if the marker is selected or not
-    const [selectedMaker, setSelectedMarker] = useState(null)
+    
 
   useEffect(()=>{
     // window.addEventListener("resize", () => {
@@ -81,30 +82,15 @@ function MapComponent() {
                  <Marker position={{ lat: latitude, lng: longitude }} />
                  
                  { Resto.map(item =>
-                    <Marker 
-                      key={item.id} 
-                      position={{ lat: item.lat, lng: item.long }}
-                      icon={{
-                        url: '/resto.svg',
-                        scaledSize: new window.google.maps.Size(30,30),
-                        origin: new window.google.maps.Point(0,0),
-                        anchor: new window.google.maps.Point(15,15)
-
-                      }}
-                      onClick={()=>{
-                        setSelectedMarker(item)
-                      }}
-                      />) 
-                  }
-                 {selectedMaker ? console.log(selectedMaker.lat): null}
-
-                 
+                    <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}}/>
+                  ) 
+                 }
              </GoogleMap>
         </div>
         <div className={`center reviews ${review ? '' : 'display'}`}>
             {
               Resto.map(item => 
-                <Reviews key={item.id} name={item.restaurantName} address={item.address} />
+                <Reviews key={item.id} name={item.restaurantName} address={item.address} ratings={item.ratings} />
               )
             }
         </div>
