@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {  Marker, InfoWindow } from '@react-google-maps/api'
 
 function MarkerItem(props) {
-  const [selectedMaker, setSelectedMarker] = useState(null)
+  const [selectedMaker, setSelectedMarker] = useState(false)
     return (
         <div>
                <Marker 
@@ -14,8 +14,17 @@ function MarkerItem(props) {
                         anchor: new window.google.maps.Point(15,15)
 
                       }}
-                      
+                      onClick={()=> setSelectedMarker(!selectedMaker)}
                       />
+
+                    {selectedMaker ? (
+                    <InfoWindow position={props.position}>
+                      <div>
+                          Hello everyone
+                        </div>  
+                    </InfoWindow>
+                    ): !selectedMaker
+                    }
              
         </div>
     )

@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Reviews(props) {
     const classes = useStyles();
-    
 
     return (
       <div className='center'>
@@ -53,12 +52,14 @@ function Reviews(props) {
                        {props.address}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {/* Make the average */}
-                        < ImStarEmpty />
-                        < ImStarEmpty />
-                        < ImStarEmpty />
-                        < ImStarEmpty />
-                        < ImStarEmpty />
+                          {
+                    
+                            props.ratings.reduce((sum, item) =>{  
+                             return sum = (sum + item.stars) / props.ratings.length 
+                            }, 0)
+            
+                          }
+                            
                     </Typography>
                 </CardContent>
             </CardActionArea>`

@@ -33,6 +33,7 @@ function MapComponent() {
       const ismobile = window.innerWidth <= 425;
       if (ismobile) setIsMobile(!isMobile);
   // }, true);
+  // eslint-disable-next-line
   }, [])
   
   // const onMapClick = useCallback(e =>{
@@ -83,7 +84,7 @@ function MapComponent() {
                  <Marker position={{ lat: latitude, lng: longitude }} />
                  
                  { Resto.map(item =>
-                    <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}}/>
+                    <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName}/>
                   ) 
                  }
              </GoogleMap>
