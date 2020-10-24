@@ -35,7 +35,14 @@ body{
 .displayButton{
   display: none;
 }
-
+.loading{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.loading p{
+  margin-top: 30%;
+}
 /*
  Small device 
  */

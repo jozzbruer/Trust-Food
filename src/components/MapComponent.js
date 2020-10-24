@@ -6,6 +6,7 @@ import StylesMap from '../StylesMap'
 import Reviews from './Reviews'
 import './../App.css'
 import MarkerItem from './MarkerItem'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const libraries = ['places']
 
@@ -63,8 +64,7 @@ function MapComponent() {
 
     if (loadError)
         return 'Error while loading map'
-    if (!isLoaded)
-        return 'Loading Maps'
+
     return (
         <>
         <div className={`${isMobile ? "" : "displayButton"}`}>
@@ -75,20 +75,24 @@ function MapComponent() {
        </div>
       
       <div className='wrapper'>
-        <div className={`map ${review ? 'display' : ''}`}>
-        <GoogleMap 
-             mapContainerStyle={mapContainerStyle}
-             zoom={15}
-             center={center} 
-             options={options} >
-                 <Marker position={{ lat: latitude, lng: longitude }} />
-                 
-                 { Resto.map(item =>
-                    <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName}/>
-                  ) 
-                 }
-             </GoogleMap>
-        </div>
+        {
+          !isLoaded ? (<div className='loading map'><p><CircularProgress/></p></div>) : (
+            <div className={`map ${review ? 'display' : ''}`}>
+            <GoogleMap 
+                mapContainerStyle={mapContainerStyle}
+                zoom={15}
+                center={center} 
+                options={options} >
+                    <Marker position={{ lat: latitude, lng: longitude }} />
+                    
+                    { Resto.map(item =>
+                        <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName}/>
+                      ) 
+                    }
+                </GoogleMap>
+            </div>
+          )
+        }
         <div className={`center reviews ${review ? '' : 'display'}`}>
             {
               Resto.map(item => 
