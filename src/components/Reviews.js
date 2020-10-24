@@ -11,7 +11,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { IoMdSend } from 'react-icons/io'
 import { FiArrowDownCircle } from 'react-icons/fi';
 import { Input, InputAdornment } from '@material-ui/core';
-import { ImStarEmpty } from 'react-icons/im'
+import { ImStarFull, ImStarHalf } from 'react-icons/im'
 import CommentsItem from './CommentsItem';
 
 
@@ -40,6 +40,26 @@ const useStyles = makeStyles((theme) => ({
 function Reviews(props) {
     const classes = useStyles();
 
+   const sums =  props.ratings.reduce((sum, item) =>{  
+      return sum = (sum + item.stars) / props.ratings.length 
+      
+    }, 0)
+
+    function showStars(sum){
+      let arr = []
+      while (sum > 0){
+         if (sum < 0)
+          return
+         else if (sum < 1 && sum > 0)
+          arr.push(<ImStarHalf />) 
+         else
+          arr.push(<ImStarFull />) 
+
+        sum--
+      }
+      return arr;
+    }
+
     return (
       <div className='center'>
           <Card className={classes.roo}>
@@ -52,14 +72,7 @@ function Reviews(props) {
                        {props.address}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
-                          {
-                    
-                            props.ratings.reduce((sum, item) =>{  
-                             return sum = (sum + item.stars) / props.ratings.length 
-                            }, 0)
-            
-                          }
-                            
+                        {showStars(sums)}
                     </Typography>
                 </CardContent>
             </CardActionArea>`
