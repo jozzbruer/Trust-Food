@@ -18,12 +18,12 @@ function MarkerItem(props) {
                       />
 
                     {selectedMaker ? (
-                    <InfoWindow position={props.position}>
+                    <InfoWindow position={props.position} onCloseClick={() => setSelectedMarker(!selectedMaker)}>
                       <div>
                           Hello everyone
                         </div>  
                     </InfoWindow>
-                    ): !selectedMaker
+                    ): null
                     }
              
         </div>

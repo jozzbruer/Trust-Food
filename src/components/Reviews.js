@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,7 +10,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { IoMdSend } from 'react-icons/io'
 import { FiArrowDownCircle } from 'react-icons/fi';
-import { Input, InputAdornment } from '@material-ui/core';
+import { Grid, Input, InputAdornment, Slider } from '@material-ui/core';
 import { ImStarFull, ImStarHalf } from 'react-icons/im'
 import CommentsItem from './CommentsItem';
 
@@ -39,8 +39,14 @@ const useStyles = makeStyles((theme) => ({
 
 function Reviews(props) {
     const classes = useStyles();
+    const [value, setValue] = useState(0); // Value for slider : i have to change them to set the comments
 
-   const sums =  props.ratings.reduce((sum, item) =>{  
+    function handleChange(event, newValue){ // Even for slider value
+      setValue(newValue);
+    }
+
+    // Sum of all the stars to calulate the average
+   const averageStars =  props.ratings.reduce((sum, item) =>{  
       return sum = (sum + item.stars) / props.ratings.length 
       
     }, 0)
@@ -72,13 +78,14 @@ function Reviews(props) {
                        {props.address}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {showStars(sums)}
+                        {showStars(averageStars)}
                     </Typography>
                 </CardContent>
             </CardActionArea>`
             <CardActions>
             <div className={classes.root}>
                 <Accordion>
+                 
                 <AccordionSummary
                     expandIcon={<FiArrowDownCircle />}
                     aria-controls="panel1a-content"
@@ -86,6 +93,22 @@ function Reviews(props) {
                 >
                     <Typography className={classes.heading}>Show Comments</Typography>
                 </AccordionSummary>
+                <div className={classes.form}>
+                    <Typography id="continuous-slider" gutterBottom>
+                      Rate us!
+                    </Typography>
+                    <Grid container spacing={2}>
+                      <Grid item xs>
+                        <Slider 
+                        value={value} 
+                        onChange={handleChange} 
+                        aria-labelledby="continuous-slider" 
+                        min={1} 
+                        max={5}/>
+                      </Grid>
+                    </Grid>
+                    
+                </div>
                 <form className={classes.form} noValidate autoComplete="off">
                     <Input
                     id="standard-adornment"
