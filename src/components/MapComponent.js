@@ -86,7 +86,7 @@ function MapComponent() {
                     <Marker position={{ lat: latitude, lng: longitude }} />
                     
                     { Resto.map(item =>
-                        <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName}/>
+                        <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName} ratings={item.ratings}/>
                       ) 
                     }
                 </GoogleMap>
