@@ -39,10 +39,23 @@ const useStyles = makeStyles((theme) => ({
 
 function Reviews(props) {
     const classes = useStyles();
-    const [value, setValue] = useState(0); // Value for slider : i have to change them to set the comments
+    const [stars, setStars] = useState(0) // Value for slider : i have to change them to set the comments
+    const [comment, setComment] = useState('')
+    const [allComments, setAllComments] = useState(props.ratings)
 
     function handleChange(event, newValue){ // Even for slider value
-      setValue(newValue);
+      setStars(newValue);
+    }
+    function handleComment(event){ // Even for comment value
+      setComment(
+         event.target.value
+      );
+    }
+    // To corrected with my mentor
+    function handleSubmit(event){
+      props.ratings.push({stars,comment})
+      setAllComments(props.ratings)
+        console.log(props.ratings)
     }
 
     // Sum of all the stars to calulate the average
@@ -93,28 +106,28 @@ function Reviews(props) {
                 >
                     <Typography className={classes.heading}>Show Comments</Typography>
                 </AccordionSummary>
-                <div className={classes.form}>
+                <form className={classes.form} noValidate autoComplete="off">
                     <Typography id="continuous-slider" gutterBottom>
                       Rate us!
                     </Typography>
                     <Grid container spacing={2}>
                       <Grid item xs>
                         <Slider 
-                        value={value} 
+                        value={stars} 
                         onChange={handleChange} 
                         aria-labelledby="continuous-slider" 
-                        min={1} 
+                        min={0} 
                         max={5}/>
                       </Grid>
                     </Grid>
-                    
-                </div>
-                <form className={classes.form} noValidate autoComplete="off">
+                
                     <Input
                     id="standard-adornment"
                     label="Add your Comments"
-                    endAdornment={<InputAdornment position="end"><IoMdSend/></InputAdornment>}
+                    endAdornment={<InputAdornment position="end" onClick={handleSubmit}><IoMdSend/></InputAdornment>}
                     placeholder="Add Your Comments"
+                    name="comments"
+                    onChange={handleComment} 
                     />
                 </form>
                 {
