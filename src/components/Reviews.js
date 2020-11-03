@@ -55,7 +55,8 @@ function Reviews(props) {
     // To corrected with my mentor
     function handleSubmit(){
       setAllComments([...allComments, {stars, comment}])
-     
+      setComment('')
+      setStars(1)
     }
 
     // Sum of all the stars to calulate the average
@@ -123,6 +124,7 @@ function Reviews(props) {
                     {/* <input type="text" placeholder="First Name" onChange={handleComment} /> */}
                     <Input
                     id="standard-adornment"
+                    value={comment}
                     type="text"
                     label="Add your Comments"
                     endAdornment={<InputAdornment onClick={handleSubmit} position="end" type="submit"><IoMdSend/></InputAdornment>}
