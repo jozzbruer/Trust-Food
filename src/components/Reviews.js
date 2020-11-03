@@ -39,12 +39,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Reviews(props) {
     const classes = useStyles();
-    const [stars, setStars] = useState(0) // Value for slider : i have to change them to set the comments
+    const [stars, setStars] = useState(1) 
     const [comment, setComment] = useState('')
     const [allComments, setAllComments] = useState(props.ratings)
 
     function handleChange(event, newValue){ // Even for slider value
       setStars(newValue);
+      console.log(stars)
     }
     function handleComment(event){ // Even for comment value
       setComment(
@@ -52,21 +53,20 @@ function Reviews(props) {
       );
     }
     // To corrected with my mentor
-    function handleSubmit(event){
-      props.ratings.push({stars,comment})
-      setAllComments(props.ratings)
-        console.log(props.ratings)
+    function handleSubmit(){
+      setAllComments([...allComments, {stars, comment}])
+     
     }
 
     // Sum of all the stars to calulate the average
-   const averageStars =  props.ratings.reduce((sum, item) =>{  
-      return sum = (sum + item.stars) / props.ratings.length 
-      
-    }, 0)
+   const averageStars =  allComments.reduce((sum, item) =>{  
+       sum = (sum + item.stars) 
+       return sum / allComments.length 
+    }, 1)
 
     function showStars(sum){
       let arr = []
-      while (sum > 0){
+      while (sum >= 0){
          if (sum < 0)
           return
          else if (sum < 1 && sum > 0)
@@ -116,26 +116,28 @@ function Reviews(props) {
                         value={stars} 
                         onChange={handleChange} 
                         aria-labelledby="continuous-slider" 
-                        min={0} 
+                        min={1} 
                         max={5}/>
                       </Grid>
                     </Grid>
-                
+                    {/* <input type="text" placeholder="First Name" onChange={handleComment} /> */}
                     <Input
                     id="standard-adornment"
+                    type="text"
                     label="Add your Comments"
-                    endAdornment={<InputAdornment position="end" onClick={handleSubmit}><IoMdSend/></InputAdornment>}
+                    endAdornment={<InputAdornment onClick={handleSubmit} position="end" type="submit"><IoMdSend/></InputAdornment>}
                     placeholder="Add Your Comments"
                     name="comments"
-                    onChange={handleComment} 
+                    onChange={handleComment}  
                     />
+                   
                 </form>
                 {
-                  props.ratings.map(item =>
-                <AccordionDetails className={classes.comment}>
-                        <CommentsItem key={Math.random().toString()} comment={item.comment} rate={item.stars} /> 
-                </AccordionDetails>
-                     )}
+                    allComments.map(item =>
+                  <AccordionDetails className={classes.comment}>
+                          <CommentsItem key={Math.random().toString()} comment={item.comment} rate={item.stars} /> 
+                  </AccordionDetails>
+                )}
                 </Accordion>
                 </div>
             </CardActions>

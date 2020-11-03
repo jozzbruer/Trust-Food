@@ -7,11 +7,11 @@ const Resto = [
        "long":-122.05161510583497,
        "ratings":[
           {
-             "stars":4,
+             "stars":5,
              "comment":"Great! But not many veggie options."
           },
           {
-             "stars":5,
+             "stars":4,
              "comment":"My favorite restaurant!"
           }
        ]
@@ -24,7 +24,7 @@ const Resto = [
        "long":-122.04667996072243,
        "ratings":[
           {
-             "stars":5,
+             "stars":4,
              "comment":"Tiny pizzeria next to Sacre Coeur!"
           },
           {
