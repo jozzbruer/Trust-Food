@@ -63,7 +63,7 @@ function Reviews(props) {
    const averageStars =  allComments.reduce((sum, item) =>{  
        sum = (sum + item.stars) 
        return sum / allComments.length 
-    }, 1)
+    }, 0)
 
     function showStars(sum){
       let arr = []
