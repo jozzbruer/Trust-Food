@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
+import axios from 'axios'
 import Resto from '../data/restaurantData'
 import token from '../token'
 import StylesMap from '../StylesMap'
@@ -26,21 +27,14 @@ function MapComponent() {
     const [longitude, setLongitude] = useState(0)
     const [isMobile, setIsMobile] = useState(false)
     const [review, setReview] = useState(false)
-    //State to check if the marker is selected or not
+    const [restaurant, setRestaurant] = useState([])
     
-
   useEffect(()=>{
-    // window.addEventListener("resize", () => {
       const ismobile = window.innerWidth <= 425;
       if (ismobile) setIsMobile(!isMobile);
-  // }, true);
-  // eslint-disable-next-line
   }, [])
   
-  // const onMapClick = useCallback(e =>{
-
-  // }, [])
-
+  
   function handleSwich(){
     setReview(!review)
   }
@@ -50,8 +44,7 @@ function MapComponent() {
             setLatitude(position.coords.latitude)
             setLongitude(position.coords.longitude)
           });
-     
-    })
+    }, [])
     
     const center = {
         lat: latitude,
@@ -61,6 +54,16 @@ function MapComponent() {
         googleMapsApiKey: token,
         libraries,
     })
+
+    useEffect(() => {
+     axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&type=food&key=${token}`)
+    .then(response =>
+        setRestaurant(response.data.results)
+      )
+      console.log(restaurant)
+  }, [latitude, longitude])
+
+  
 
     if (loadError)
         return 'Error while loading map'
@@ -89,6 +92,11 @@ function MapComponent() {
                         <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName} ratings={item.ratings}/>
                       ) 
                     }
+
+                    {/* { restaurant.map(item =>
+                        <MarkerItem key={item.place_id} position={{lat: item.location.lat, lng: item.location.long}} address={item.address} name={item.name} ratings={item.rating}/>
+                      ) 
+                    }  */}
                 </GoogleMap>
             </div>
           )
