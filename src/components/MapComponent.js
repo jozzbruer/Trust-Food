@@ -5,8 +5,10 @@ import Resto from '../data/restaurantData'
 import token from '../token'
 import StylesMap from '../StylesMap'
 import Reviews from './Reviews'
+import CustomReviews from './CustomReviews'
 import './../App.css'
 import MarkerItem from './MarkerItem'
+import CustomMarkerItem from './CustomMakerItem'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const libraries = ['places']
@@ -55,15 +57,18 @@ function MapComponent() {
         libraries,
     })
 
+    async function getRestaurant(){
+      await axios
+           .get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&type=restaurant&key=${token}`)
+           .then(response => setRestaurant(response.data.results))
+           .catch(err => {
+               console.log(err);
+               return null;
+           });
+    }
     useEffect(() => {
-     axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&type=food&key=${token}`)
-    .then(response =>
-        setRestaurant(response.data.results)
-      )
-      console.log(restaurant)
-  }, [latitude, longitude])
-
-  
+     getRestaurant()
+  }, [restaurant])
 
     if (loadError)
         return 'Error while loading map'
@@ -83,20 +88,28 @@ function MapComponent() {
             <div className={`map ${review ? 'display' : ''}`}>
             <GoogleMap 
                 mapContainerStyle={mapContainerStyle}
-                zoom={15}
+                zoom={18}
                 center={center} 
                 options={options} >
-                    <Marker position={{ lat: latitude, lng: longitude }} />
+                    <Marker position={{ lat: latitude, lng: longitude }} 
+                      icon={{
+                        url: '/main.png',
+                        scaledSize: new window.google.maps.Size(60,60),
+                        origin: new window.google.maps.Point(0,0),
+                        anchor: new window.google.maps.Point(30,30)
+
+                      }}
+                    />
                     
                     { Resto.map(item =>
                         <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName} ratings={item.ratings}/>
                       ) 
                     }
 
-                    {/* { restaurant.map(item =>
-                        <MarkerItem key={item.place_id} position={{lat: item.location.lat, lng: item.location.long}} address={item.address} name={item.name} ratings={item.rating}/>
+                    { restaurant.map(item =>
+                        <CustomMarkerItem key={item.place_id} position={{lat: item.geometry.location.lat, lng: item.geometry.location.lng}} address={item.vicinity} name={item.name} ratings={item.rating}/>
                       ) 
-                    }  */}
+                    } 
                 </GoogleMap>
             </div>
           )
@@ -107,6 +120,12 @@ function MapComponent() {
                 <Reviews key={item.id} name={item.restaurantName} address={item.address} ratings={item.ratings} />
               )
             }
+
+            {
+              restaurant.map(item => 
+                <CustomReviews key={item.place_id}  name={item.name}  address={item.vicinity} ratings={item.rating} />
+              )
+            } 
         </div>
       </div>
     </>
