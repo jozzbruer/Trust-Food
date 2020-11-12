@@ -26,6 +26,7 @@ const options = {
 
 function MapComponent() {
     const [latitude, setLatitude] = useState(0)
+    const [counter, setCounter] = useState(0)
     const [longitude, setLongitude] = useState(0)
     const [isMobile, setIsMobile] = useState(false)
     const [review, setReview] = useState(false)
@@ -60,16 +61,18 @@ function MapComponent() {
     async function getRestaurant(){
       await axios
            .get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&type=restaurant&key=${token}`)
-           .then(response => setRestaurant(response.data.results))
+           .then(response => setRestaurant(response.data.results), setCounter(prevCounter => prevCounter + 1))
            .catch(err => {
                console.log(err);
                return null;
            });
     }
     useEffect(() => {
-     getRestaurant()
+     if (restaurant.length <= 20 && counter <= 20){
+      getRestaurant()
+     }
   }, [restaurant])
-
+  
     if (loadError)
         return 'Error while loading map'
 
