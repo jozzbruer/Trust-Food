@@ -126,7 +126,7 @@ function MapComponent() {
 
             {
               restaurant.map(item => 
-                <CustomReviews key={item.place_id}  name={item.name}  address={item.vicinity} ratings={item.rating} />
+                <CustomReviews key={item.place_id} id={item.place_id}  name={item.name}  address={item.vicinity} ratings={item.rating}/>
               )
             } 
         </div>

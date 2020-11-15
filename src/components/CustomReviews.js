@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,6 +14,7 @@ import { FiArrowDownCircle } from 'react-icons/fi';
 import { Grid, Input, InputAdornment, Slider } from '@material-ui/core';
 import { ImStarFull, ImStarHalf } from 'react-icons/im'
 import CommentsItem from './CommentsItem';
+import token from '../token'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
 function CustomReviews(props) {
     const classes = useStyles();
     const [stars, setStars] = useState(1) 
-    const [comment, setComment] = useState('')
-   // const [allComments, setAllComments] = useState(props.ratings)
+    const [comment, setComment] = useState([])
+    const [allComments, setAllComments] = useState([])
 
     function handleChange(event, newValue){ // Even for slider value
       setStars(newValue);
@@ -65,6 +67,16 @@ function CustomReviews(props) {
 //        return sum / allComments.length 
 //     }, 0)
 
+
+async function getRestaurantDetails(placeId){
+  await axios
+       .get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${token}`)
+       .then(response =>  setAllComments(response.data.result.reviews))
+       .catch(err => {
+           console.log(err);
+           return null;
+       });
+}
     function showStars(sum){
       let arr = []
       while (sum >= 0){
@@ -79,7 +91,7 @@ function CustomReviews(props) {
       }
       return arr;
     }
-
+    console.log(comment)
     return (
       <div className='center'>
           <Card className={classes.roo}>
@@ -98,7 +110,7 @@ function CustomReviews(props) {
             </CardActionArea>`
             <CardActions>
             <div className={classes.root}>
-                <Accordion>
+                <Accordion onClick={()=> getRestaurantDetails(props.id)}>
                  
                 <AccordionSummary
                     expandIcon={<FiArrowDownCircle />}
@@ -123,7 +135,7 @@ function CustomReviews(props) {
                     </Grid>
                     {/* <input type="text" placeholder="First Name" onChange={handleComment} /> */}
                     <Input
-                    id="standard-adornment"
+                    
                     value={comment}
                     type="text"
                     label="Add your Comments"
@@ -134,12 +146,12 @@ function CustomReviews(props) {
                     />
                    
                 </form>
-                {/* {
+                {
                     allComments.map(item =>
                   <AccordionDetails className={classes.comment}>
-                          <CommentsItem key={Math.random().toString()} comment={item.comment} rate={item.stars} /> 
+                          <CommentsItem key={Math.random().toString()} comment={item.text} rate={item.rating} /> 
                   </AccordionDetails>
-                )} */}
+                )}
                 </Accordion>
                 </div>
             </CardActions>

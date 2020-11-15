@@ -123,7 +123,7 @@ function Reviews(props) {
                     </Grid>
                     {/* <input type="text" placeholder="First Name" onChange={handleComment} /> */}
                     <Input
-                    id="standard-adornment"
+                    
                     value={comment}
                     type="text"
                     label="Add your Comments"
