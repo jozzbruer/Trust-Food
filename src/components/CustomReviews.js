@@ -91,7 +91,6 @@ async function getRestaurantDetails(placeId){
       }
       return arr;
     }
-    console.log(comment)
     return (
       <div className='center'>
           <Card className={classes.roo}>
