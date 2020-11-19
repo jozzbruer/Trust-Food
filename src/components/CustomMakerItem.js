@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {  Marker, InfoWindow } from '@react-google-maps/api'
 import { CardContent, makeStyles, Typography } from '@material-ui/core'
 import { ImStarFull, ImStarHalf } from 'react-icons/im';
-import CommentsItem from './CommentsItem';
+
 
 const useStyles = makeStyles({
   root: {
@@ -84,11 +84,11 @@ function CustomMarkerItem(props) {
                               </Typography>
                               <hr/>
                               <Typography className={classes.comments}>
-                                <p className={classes.paragraph}>Comments</p>
+                                {/* <p className={classes.paragraph}>Comments</p>
                                  {/* {
                                 props.ratings.map(item =>
                                   <CommentsItem key={Math.random().toString()} comment={item.comment} rate={item.stars} /> 
-                                )} */}
+                                )} */} 
                               </Typography>
                             </CardContent>
                           </div>

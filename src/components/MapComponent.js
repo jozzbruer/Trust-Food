@@ -10,8 +10,36 @@ import './../App.css'
 import MarkerItem from './MarkerItem'
 import CustomMarkerItem from './CustomMakerItem'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import { Button, TextField } from '@material-ui/core'
 
 const libraries = ['places']
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    textAlign: 'center',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    width: '400px',
+    height: '50vh'
+  },
+  form:{
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+  }
+}));
 
 
 const mapContainerStyle = {
@@ -25,12 +53,17 @@ const options = {
 }
 
 function MapComponent() {
+    const classes = useStyles();
+
     const [latitude, setLatitude] = useState(0)
+    const [data, setData] = useState(Resto)
     const [counter, setCounter] = useState(0)
     const [longitude, setLongitude] = useState(0)
     const [isMobile, setIsMobile] = useState(false)
     const [review, setReview] = useState(false)
     const [restaurant, setRestaurant] = useState([])
+    const [open, setOpen] = useState(false)
+    const [value, setValue] = useState({})
     
   useEffect(()=>{
       const ismobile = window.innerWidth <= 425;
@@ -41,6 +74,17 @@ function MapComponent() {
   function handleSwich(){
     setReview(!review)
   }
+
+  // function for modal
+  function handleOpen(event){
+    setValue({lat: event.latLng.lat(), long: event.latLng.lng()})
+   
+    setOpen(true);
+  };
+
+  function handleClose () {
+    setOpen(false);
+  };
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -75,9 +119,10 @@ function MapComponent() {
   
     if (loadError)
         return 'Error while loading map'
-
+       
     return (
         <>
+       
         <div className={`${isMobile ? "" : "displayButton"}`}>
         <label onChange={handleSwich} className="switch">
         <input type="checkbox" />
@@ -89,7 +134,8 @@ function MapComponent() {
         {
           !isLoaded ? (<div className='loading map'><p><CircularProgress/></p></div>) : (
             <div className={`map ${review ? 'display' : ''}`}>
-            <GoogleMap 
+            <GoogleMap
+                onClick={handleOpen} 
                 mapContainerStyle={mapContainerStyle}
                 zoom={18}
                 center={center} 
@@ -104,7 +150,7 @@ function MapComponent() {
                       }}
                     />
                     
-                    { Resto.map(item =>
+                    { data.map(item =>
                         <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName} ratings={item.ratings}/>
                       ) 
                     }
@@ -119,7 +165,7 @@ function MapComponent() {
         }
         <div className={`center reviews ${review ? '' : 'display'}`}>
             {
-              Resto.map(item => 
+              data.map(item => 
                 <Reviews key={item.id} name={item.restaurantName} address={item.address} ratings={item.ratings} />
               )
             }
@@ -131,6 +177,39 @@ function MapComponent() {
             } 
         </div>
       </div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Add new Restaurant</h2>
+            <form className={classes.form}>
+              <div>
+                <TextField id="standard-name" label="Name"  />
+                <TextField id="standard-address" label="Adress"  />
+              </div>
+              <br />
+  
+              <Button variant="contained" color="primary">
+                Add new
+              </Button>
+              <Button variant="contained" color="secondary" onClick={handleClose}>
+                Cancel
+              </Button>
+          </form>
+          </div>
+        </Fade>
+      </Modal>
+
     </>
     )
 }

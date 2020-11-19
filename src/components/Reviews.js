@@ -45,7 +45,6 @@ function Reviews(props) {
 
     function handleChange(event, newValue){ // Even for slider value
       setStars(newValue);
-      console.log(stars)
     }
     function handleComment(event){ // Even for comment value
       setComment(

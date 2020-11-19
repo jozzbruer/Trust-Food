@@ -41,32 +41,30 @@ const useStyles = makeStyles((theme) => ({
 
 function CustomReviews(props) {
     const classes = useStyles();
-    const [stars, setStars] = useState(1) 
-    const [comment, setComment] = useState([])
+    const [rating, setRating] = useState(1) 
+    const [text, setText] = useState([])
     const [allComments, setAllComments] = useState([])
 
     function handleChange(event, newValue){ // Even for slider value
-      setStars(newValue);
-      console.log(stars)
+      setRating(newValue);
     }
     function handleComment(event){ // Even for comment value
-      setComment(
+      setText(
          event.target.value
       );
     }
     // To corrected with my mentor
-    // function handleSubmit(){
-    //   setAllComments([...allComments, {stars, comment}])
-    //   setComment('')
-    //   setStars(1)
-    // }
+    function handleSubmit(){
+      setAllComments([...allComments, {rating, text}])
+      setText('')
+      setRating(1)
+    }
 
     // Sum of all the stars to calulate the average
 //    const averageStars =  allComments.reduce((sum, item) =>{  
 //        sum = (sum + item.stars) 
 //        return sum / allComments.length 
 //     }, 0)
-
 
 async function getRestaurantDetails(placeId){
   await axios
@@ -125,7 +123,7 @@ async function getRestaurantDetails(placeId){
                     <Grid container spacing={2}>
                       <Grid item xs>
                         <Slider 
-                        value={stars} 
+                        value={rating} 
                         onChange={handleChange} 
                         aria-labelledby="continuous-slider" 
                         min={1} 
@@ -135,10 +133,10 @@ async function getRestaurantDetails(placeId){
                     {/* <input type="text" placeholder="First Name" onChange={handleComment} /> */}
                     <Input
                     
-                    value={comment}
+                    value={text}
                     type="text"
                     label="Add your Comments"
-                    endAdornment={<InputAdornment onClick={()=>{}} position="end" type="submit"><IoMdSend/></InputAdornment>}
+                    endAdornment={<InputAdornment onClick={handleSubmit} position="end" type="submit"><IoMdSend/></InputAdornment>}
                     placeholder="Add Your Comments"
                     name="comments"
                     onChange={handleComment}  
