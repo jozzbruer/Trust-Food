@@ -57,17 +57,21 @@ function MapComponent() {
 
     const [latitude, setLatitude] = useState(0)
     const [data, setData] = useState(Resto)
+    const [restaurantName,setRestaurantName] = useState('')
+    const [address, setAddress] = useState('')
     const [counter, setCounter] = useState(0)
     const [longitude, setLongitude] = useState(0)
     const [isMobile, setIsMobile] = useState(false)
     const [review, setReview] = useState(false)
     const [restaurant, setRestaurant] = useState([])
     const [open, setOpen] = useState(false)
-    const [value, setValue] = useState({})
+    const [lat, setlat] = useState(0) // By clicking on the map
+    const [long, setLong] = useState() // By clicking on the map
     
   useEffect(()=>{
       const ismobile = window.innerWidth <= 425;
       if (ismobile) setIsMobile(!isMobile);
+      // eslint-disable-next-line
   }, [])
   
   
@@ -77,14 +81,35 @@ function MapComponent() {
 
   // function for modal
   function handleOpen(event){
-    setValue({lat: event.latLng.lat(), long: event.latLng.lng()})
-   
+    setlat(event.latLng.lat())
+    setLong(event.latLng.lng())
     setOpen(true);
   };
 
   function handleClose () {
     setOpen(false);
-  };
+  }
+
+  function handleName(event){
+    setRestaurantName(event.target.value)
+  }
+  function handleAdress(event){
+    setAddress(event.target.value)
+  }
+
+  // Adding new resto by clicking on the map
+  function handleSubmit(){
+    if(restaurantName !== '' && address !== ''){
+      setData([...data,{'id': Math.random().toString(), restaurantName, address, lat,long, 'ratings': [
+        {
+          "stars":1,
+          "comment":"default comments"
+        }
+      ]}])
+      handleClose()
+    }
+    
+  }
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -115,6 +140,7 @@ function MapComponent() {
      if (restaurant.length <= 20 && counter <= 20){
       getRestaurant()
      }
+     // eslint-disable-next-line
   }, [restaurant])
   
     if (loadError)
@@ -194,12 +220,12 @@ function MapComponent() {
             <h2 id="transition-modal-title">Add new Restaurant</h2>
             <form className={classes.form}>
               <div>
-                <TextField id="standard-name" label="Name"  />
-                <TextField id="standard-address" label="Adress"  />
+                <TextField type='text' value={restaurantName} id="standard-name" label="Name" onChange={handleName}  />
+                <TextField type='text' value={address} id="standard-address" label="Adress" onChange={handleAdress} />
               </div>
               <br />
   
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={handleSubmit}>
                 Add new
               </Button>
               <Button variant="contained" color="secondary" onClick={handleClose}>
