@@ -11,7 +11,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { IoMdSend } from 'react-icons/io'
 import { FiArrowDownCircle } from 'react-icons/fi';
-import { Grid, Input, InputAdornment, Slider } from '@material-ui/core';
+import { CardMedia, Grid, Input, InputAdornment, Slider } from '@material-ui/core';
 import { ImStarFull, ImStarHalf } from 'react-icons/im'
 import CommentsItem from './CommentsItem';
 import token from '../token'
@@ -68,13 +68,14 @@ function CustomReviews(props) {
 
 async function getRestaurantDetails(placeId){
   await axios
-       .get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${token}`)
+       .get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${token}`)
        .then(response =>  setAllComments(response.data.result.reviews))
        .catch(err => {
            console.log(err);
            return null;
        });
 }
+
     function showStars(sum){
       let arr = []
       while (sum >= 0){
@@ -104,10 +105,21 @@ async function getRestaurantDetails(placeId){
                     {showStars(props.ratings)}
                     </Typography>
                 </CardContent>
+                <CardMedia
+                  component="img"
+                  alt="Contemplative Reptile"
+                  height="140"
+                  image="/static/images/cards/contemplative-reptile.jpg"
+                  title="Contemplative Reptile"
+                />
             </CardActionArea>`
             <CardActions>
             <div className={classes.root}>
-                <Accordion onClick={()=> getRestaurantDetails(props.id)}>
+                <Accordion onClick={()=> {
+                  getRestaurantDetails(props.id)
+                  // getRestaurantPhotos(props.position.lat, props.position.lng)
+                }
+                }>
                  
                 <AccordionSummary
                     expandIcon={<FiArrowDownCircle />}
@@ -120,6 +132,8 @@ async function getRestaurantDetails(placeId){
                     <Typography id="continuous-slider" gutterBottom>
                       Rate us!
                     </Typography>
+                    <img src={`https://maps.googleapis.com/maps/api/streetview?location=${props.position.lat},${props.position.lng}&size=456x456&key=${token}`} alt='resto'/>
+                    
                     <Grid container spacing={2}>
                       <Grid item xs>
                         <Slider 

@@ -129,7 +129,7 @@ function MapComponent() {
 
     async function getRestaurant(){
       await axios
-           .get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&type=restaurant&key=${token}`)
+           .get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&type=restaurant&key=${token}`)
            .then(response => setRestaurant(response.data.results), setCounter(prevCounter => prevCounter + 1))
            .catch(err => {
                console.log(err);
@@ -142,10 +142,10 @@ function MapComponent() {
      }
      // eslint-disable-next-line
   }, [restaurant])
-  
+   
     if (loadError)
         return 'Error while loading map'
-       
+   
     return (
         <>
        
@@ -177,12 +177,24 @@ function MapComponent() {
                     />
                     
                     { data.map(item =>
-                        <MarkerItem key={item.id} position={{lat: item.lat, lng: item.long}} address={item.address} name={item.restaurantName} ratings={item.ratings}/>
+                        <MarkerItem 
+                        key={item.id} 
+                        position={{lat: item.lat, lng: item.long}} address={item.address} 
+                        name={item.restaurantName} 
+                        ratings={item.ratings}
+                        />
                       ) 
                     }
 
                     { restaurant.map(item =>
-                        <CustomMarkerItem key={item.place_id} position={{lat: item.geometry.location.lat, lng: item.geometry.location.lng}} address={item.vicinity} name={item.name} ratings={item.rating}/>
+                        <CustomMarkerItem 
+                        key={item.place_id} 
+                        position={{lat: item.geometry.location.lat, lng: item.geometry.location.lng}} 
+                        icon={item.icon} 
+                        address={item.vicinity} 
+                        name={item.name} 
+                        ratings={item.rating}
+                        />
                       ) 
                     } 
                 </GoogleMap>
@@ -192,13 +204,26 @@ function MapComponent() {
         <div className={`center reviews ${review ? '' : 'display'}`}>
             {
               data.map(item => 
-                <Reviews key={item.id} name={item.restaurantName} address={item.address} ratings={item.ratings} />
+                <Reviews 
+                key={item.id} 
+                name={item.restaurantName} 
+                address={item.address} 
+                ratings={item.ratings} 
+                image={item.image} 
+                />
               )
             }
 
             {
               restaurant.map(item => 
-                <CustomReviews key={item.place_id} id={item.place_id}  name={item.name}  address={item.vicinity} ratings={item.rating}/>
+                <CustomReviews 
+                key={item.place_id} 
+                id={item.place_id} 
+                position={{lat: item.geometry.location.lat, lng: item.geometry.location.lng}}  
+                name={item.name}  
+                address={item.vicinity} 
+                ratings={item.rating} 
+                />
               )
             } 
         </div>

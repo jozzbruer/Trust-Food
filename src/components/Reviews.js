@@ -10,7 +10,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { IoMdSend } from 'react-icons/io'
 import { FiArrowDownCircle } from 'react-icons/fi';
-import { Grid, Input, InputAdornment, Slider } from '@material-ui/core';
+import { CardMedia, Grid, Input, InputAdornment, Slider } from '@material-ui/core';
 import { ImStarFull, ImStarHalf } from 'react-icons/im'
 import CommentsItem from './CommentsItem';
 
@@ -94,6 +94,7 @@ function Reviews(props) {
                         {showStars(averageStars)}
                     </Typography>
                 </CardContent>
+               
             </CardActionArea>`
             <CardActions>
             <div className={classes.root}>
@@ -110,6 +111,13 @@ function Reviews(props) {
                     <Typography id="continuous-slider" gutterBottom>
                       Rate us!
                     </Typography>
+                    <CardMedia
+                      component="img"
+                      alt="resto"
+                      height="140"
+                      image={props.image}
+                      title="resto"
+                    />
                     <Grid container spacing={2}>
                       <Grid item xs>
                         <Slider 
