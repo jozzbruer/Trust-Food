@@ -179,7 +179,8 @@ function MapComponent() {
                     { data.map(item =>
                         <MarkerItem 
                         key={item.id} 
-                        position={{lat: item.lat, lng: item.long}} address={item.address} 
+                        position={{lat: item.lat, lng: item.long}} 
+                        address={item.address} 
                         name={item.restaurantName} 
                         ratings={item.ratings}
                         />
@@ -207,6 +208,7 @@ function MapComponent() {
                 <Reviews 
                 key={item.id} 
                 name={item.restaurantName} 
+                position={{lat: item.lat, lng: item.long}} 
                 address={item.address} 
                 ratings={item.ratings} 
                 image={item.image} 

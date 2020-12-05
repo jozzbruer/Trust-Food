@@ -10,9 +10,10 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { IoMdSend } from 'react-icons/io'
 import { FiArrowDownCircle } from 'react-icons/fi';
-import { CardMedia, Grid, Input, InputAdornment, Slider } from '@material-ui/core';
+import { Grid, Input, InputAdornment, Slider } from '@material-ui/core';
 import { ImStarFull, ImStarHalf } from 'react-icons/im'
 import CommentsItem from './CommentsItem';
+import token from '../token'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -111,13 +112,7 @@ function Reviews(props) {
                     <Typography id="continuous-slider" gutterBottom>
                       Rate us!
                     </Typography>
-                    <CardMedia
-                      component="img"
-                      alt="resto"
-                      height="140"
-                      image={props.image}
-                      title="resto"
-                    />
+                    <img src={`https://maps.googleapis.com/maps/api/streetview?location=${props.position.lat},${props.position.lng}&size=456x456&key=${token}`} alt='resto'/>
                     <Grid container spacing={2}>
                       <Grid item xs>
                         <Slider 

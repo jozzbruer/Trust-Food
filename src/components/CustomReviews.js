@@ -11,7 +11,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { IoMdSend } from 'react-icons/io'
 import { FiArrowDownCircle } from 'react-icons/fi';
-import { CardMedia, Grid, Input, InputAdornment, Slider } from '@material-ui/core';
+import { Grid, Input, InputAdornment, Slider } from '@material-ui/core';
 import { ImStarFull, ImStarHalf } from 'react-icons/im'
 import CommentsItem from './CommentsItem';
 import token from '../token'
@@ -105,13 +105,6 @@ async function getRestaurantDetails(placeId){
                     {showStars(props.ratings)}
                     </Typography>
                 </CardContent>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="140"
-                  image="/static/images/cards/contemplative-reptile.jpg"
-                  title="Contemplative Reptile"
-                />
             </CardActionArea>`
             <CardActions>
             <div className={classes.root}>
