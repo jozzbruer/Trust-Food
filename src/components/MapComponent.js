@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Button, TextField } from '@material-ui/core'
+import { Button, Grid, Slider, TextField, Typography } from '@material-ui/core'
 
 const libraries = ['places']
 
@@ -67,6 +67,8 @@ function MapComponent() {
     const [open, setOpen] = useState(false)
     const [lat, setlat] = useState(0) // By clicking on the map
     const [long, setLong] = useState() // By clicking on the map
+    const [minimum, setMinimum] = useState(1)
+    const [maximum, setMaximum] = useState(5)
     
   useEffect(()=>{
       const ismobile = window.innerWidth <= 425;
@@ -109,6 +111,13 @@ function MapComponent() {
       handleClose()
     }
     
+  }
+
+  function handleMin(event, newValue){
+    setMinimum(newValue)
+  }
+  function handleMax(event, newValue){
+    setMaximum(newValue)
   }
 
     useEffect(() => {
@@ -203,6 +212,34 @@ function MapComponent() {
           )
         }
         <div className={`center reviews ${review ? '' : 'display'}`}>
+            <Grid className='center'>
+              <Typography id="continuous-slider" gutterBottom>
+                  Filter
+              </Typography>
+              <Grid item xs>
+                  <Slider 
+                            onChange={handleMin} 
+                            value={minimum}
+                            aria-labelledby="continuous-slider" 
+                            min={1} 
+                            max={5}
+                            />
+                  </Grid>
+              </Grid>
+
+              <Grid className='center'>
+              <Grid item xs>
+                  <Slider 
+                            onChange={handleMax} 
+                            value={maximum}
+                            aria-labelledby="continuous-slider" 
+                            min={1} 
+                            max={5}
+                            defaultValue={5}
+                            />
+                  </Grid>
+              </Grid>
+          
             {
               data.map(item => 
                 <Reviews 
