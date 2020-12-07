@@ -43,9 +43,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 const mapContainerStyle = {
-    width: '70vw',
-    minHeight: '85vh'
-}
+    width: '100%',
+    height: '85vh'    
+  }
+
 
 const options = {
     styles: StylesMap.map,
@@ -169,7 +170,8 @@ function MapComponent() {
         {
           !isLoaded ? (<div className='loading map'><p><CircularProgress/></p></div>) : (
             <div className={`map ${review ? 'display' : ''}`}>
-            <GoogleMap
+              <Grid>
+              <GoogleMap
                 onClick={handleOpen} 
                 mapContainerStyle={mapContainerStyle}
                 zoom={18}
@@ -208,6 +210,7 @@ function MapComponent() {
                       ) 
                     } 
                 </GoogleMap>
+              </Grid>
             </div>
           )
         }
