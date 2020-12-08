@@ -76,6 +76,7 @@ async function getRestaurantDetails(placeId){
        });
 }
 
+
     function showStars(sum){
       let arr = []
       while (sum >= 0){
@@ -108,16 +109,17 @@ async function getRestaurantDetails(placeId){
             </CardActionArea>`
             <CardActions>
             <div className={classes.root}>
-                <Accordion onClick={()=> {
-                  getRestaurantDetails(props.id)
-                  // getRestaurantPhotos(props.position.lat, props.position.lng)
-                }
-                }>
+                <Accordion>
                  
                 <AccordionSummary
                     expandIcon={<FiArrowDownCircle />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
+                    onClick={()=> {
+                      getRestaurantDetails(props.id)
+                      // getRestaurantPhotos(props.position.lat, props.position.lng)
+                    }
+                  }
                 >
                     <Typography className={classes.heading}>Show Comments</Typography>
                 </AccordionSummary>
