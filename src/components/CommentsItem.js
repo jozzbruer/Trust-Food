@@ -18,5 +18,4 @@ function CommentsItem(props) {
         </div>
     )
 }
-
 export default CommentsItem

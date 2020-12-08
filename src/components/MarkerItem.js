@@ -81,14 +81,6 @@ function MarkerItem(props) {
                               <Typography className={classes.average} color="textPrimary" gutterBottom>
                                 {showStars(averageStars)}
                               </Typography>
-                              <hr/>
-                              <Typography className={classes.comments}>
-                                {/* <p className={classes.paragraph}>Comments</p>
-                                 {
-                                props.ratings.map(item =>
-                                  <CommentsItem key={Math.random().toString()} comment={item.comment} rate={item.stars} /> 
-                                )} */}
-                              </Typography>
                             </CardContent>
                           </div>
                     </InfoWindow>

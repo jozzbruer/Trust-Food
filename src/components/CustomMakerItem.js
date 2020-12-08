@@ -7,7 +7,6 @@ import { ImStarFull, ImStarHalf } from 'react-icons/im';
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    // overflow: 'scroll'
   },
   title: {
     fontSize: 14,

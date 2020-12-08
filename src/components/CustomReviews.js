@@ -60,12 +60,6 @@ function CustomReviews(props) {
       setRating(1)
     }
 
-    // Sum of all the stars to calulate the average
-//    const averageStars =  allComments.reduce((sum, item) =>{  
-//        sum = (sum + item.stars) 
-//        return sum / allComments.length 
-//     }, 0)
-
 async function getRestaurantDetails(placeId){
   await axios
        .get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${token}`)
@@ -117,7 +111,6 @@ async function getRestaurantDetails(placeId){
                     id="panel1a-header"
                     onClick={()=> {
                       getRestaurantDetails(props.id)
-                      // getRestaurantPhotos(props.position.lat, props.position.lng)
                     }
                   }
                 >
@@ -139,7 +132,6 @@ async function getRestaurantDetails(placeId){
                         max={5}/>
                       </Grid>
                     </Grid>
-                    {/* <input type="text" placeholder="First Name" onChange={handleComment} /> */}
                     <Input
                     
                     value={text}

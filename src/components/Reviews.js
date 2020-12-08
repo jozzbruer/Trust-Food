@@ -52,7 +52,7 @@ function Reviews(props) {
          event.target.value
       );
     }
-    // To corrected with my mentor
+
     function handleSubmit(){
       setAllComments([...allComments, {stars, comment}])
       setComment('')
@@ -123,9 +123,8 @@ function Reviews(props) {
                         max={5}/>
                       </Grid>
                     </Grid>
-                    {/* <input type="text" placeholder="First Name" onChange={handleComment} /> */}
-                    <Input
                     
+                    <Input
                     value={comment}
                     type="text"
                     label="Add your Comments"
