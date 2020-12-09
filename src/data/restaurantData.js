@@ -14,7 +14,8 @@ const Resto = [
              "stars":4,
              "comment":"My favorite restaurant!"
           }
-       ]
+       ],
+       "average":4.5
     },
     {
         "id": 2,
@@ -31,7 +32,8 @@ const Resto = [
              "stars":3,
              "comment":"Meh, it was fine."
           }
-       ]
+       ],
+       "average":3.5
     },
     {
         "id": 3,
@@ -48,7 +50,8 @@ const Resto = [
               "stars":3,
               "comment":"I love it"
            }
-        ]
+        ],
+        "average":4
      },
      {
         "id": 4,
@@ -65,7 +68,8 @@ const Resto = [
               "stars":3,
               "comment":"Good experience"
            }
-        ]
+        ],
+        "average":4
      },
      {
         "id": 5,
@@ -83,7 +87,8 @@ const Resto = [
               "comment":"Yeeeeee! Free WiFi"
            }
            
-        ]
+        ],
+        "average":4
      }
      ,{
         "id": 6,
@@ -100,7 +105,8 @@ const Resto = [
               "stars":3,
               "comment":"Hmm! No words"
            }
-        ]
+        ],
+        "average":4
      }
  ]
 

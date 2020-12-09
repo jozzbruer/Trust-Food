@@ -174,7 +174,7 @@ function MapComponent() {
               <GoogleMap
                 onClick={handleOpen} 
                 mapContainerStyle={mapContainerStyle}
-                zoom={18}
+                zoom={16}
                 center={center} 
                 options={options} >
                     <Marker position={{ lat: latitude, lng: longitude }} 
@@ -187,18 +187,19 @@ function MapComponent() {
                       }}
                     />
                     
-                    { data.map(item =>
+                    { data.filter(item => item.average >= minimum && item.average <= maximum ).map(item =>
                         <MarkerItem 
                         key={item.id} 
                         position={{lat: item.lat, lng: item.long}} 
                         address={item.address} 
                         name={item.restaurantName} 
                         ratings={item.ratings}
+                        average={item.average}
                         />
                       ) 
                     }
 
-                    { restaurant.map(item =>
+                    { restaurant.filter(item => item.rating >= minimum && item.rating <= maximum ).map(item =>
                         <CustomMarkerItem 
                         key={item.place_id} 
                         position={{lat: item.geometry.location.lat, lng: item.geometry.location.lng}} 
@@ -244,20 +245,20 @@ function MapComponent() {
               </Grid>
           
             {
-              data.map(item => 
+              data.filter(item => item.average >= minimum && item.average <= maximum ).map(item => 
                 <Reviews 
                 key={item.id} 
                 name={item.restaurantName} 
                 position={{lat: item.lat, lng: item.long}} 
                 address={item.address} 
                 ratings={item.ratings} 
-                image={item.image} 
+                average={item.average} 
                 />
               )
             }
 
             {
-              restaurant.map(item => 
+              restaurant.filter(item => item.rating >= minimum && item.rating <= maximum ).map(item => 
                 <CustomReviews 
                 key={item.place_id} 
                 id={item.place_id} 

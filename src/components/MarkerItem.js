@@ -35,10 +35,10 @@ function MarkerItem(props) {
   const classes = useStyles();
   const [selectedMaker, setSelectedMarker] = useState(false)
 
-  const averageStars =  props.ratings.reduce((sum, item) =>{  
-    return sum = (sum + item.stars) / props.ratings.length 
+  // const averageStars =  props.ratings.reduce((sum, item) =>{  
+  //   return sum = (sum + item.stars) / props.ratings.length 
     
-  }, 0)
+  // }, 0)
 
   function showStars(sum){
     let arr = []
@@ -79,7 +79,7 @@ function MarkerItem(props) {
                                 {props.address}
                               </Typography>
                               <Typography className={classes.average} color="textPrimary" gutterBottom>
-                                {showStars(averageStars)}
+                                {showStars(props.average)}
                               </Typography>
                             </CardContent>
                           </div>
