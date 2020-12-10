@@ -62,6 +62,7 @@ body{
     min-height: 100vh;
   /* margin-left: 1rem; */
     color: white;
+    overflow-wrap: normal;
   }
   .display{
     display: none;
