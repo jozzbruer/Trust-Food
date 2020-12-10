@@ -53,7 +53,7 @@ For the moment, there are not many restaurants or reviews. Fortunately, Google P
 <img src="./screen2.PNG" alt="screen2" height="520">
 
 ## Add new resto in the map
-<img src="./screen3.PNG" alt="screen1">
+<img src="./screen3.png" alt="screen3">
 
 ## Available Scripts
 
