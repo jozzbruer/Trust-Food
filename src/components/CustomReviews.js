@@ -127,7 +127,8 @@ async function getRestaurantDetails(placeId){
                         <Slider 
                         value={rating} 
                         onChange={handleChange} 
-                        aria-labelledby="continuous-slider" 
+                        aria-labelledby="continuous-slider"
+                        valueLabelDisplay="on" 
                         min={0} 
                         max={5}/>
                       </Grid>

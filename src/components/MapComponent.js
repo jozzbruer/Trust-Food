@@ -164,7 +164,7 @@ function MapComponent() {
       
       <div className='wrapper'>
         {
-          !isLoaded ? (<div className='loading map'><p><CircularProgress/></p></div>) : (
+          !isLoaded ? (<div className='loading map'><div><CircularProgress/></div></div>) : (
             <div className={`map ${review ? 'display' : ''}`}>
               <Grid>
               <GoogleMap
@@ -213,14 +213,15 @@ function MapComponent() {
         }
         <div className={`center reviews ${review ? '' : 'display'}`}>
             <Grid className='center'>
-              <Typography id="continuous-slider" gutterBottom>
+              <Typography id="continuous-slider" align='center' variant='h4' gutterBottom>
                   Filter
               </Typography>
               <Grid item xs>
                   <Slider 
                             onChange={handleMin} 
                             value={minimum}
-                            aria-labelledby="continuous-slider" 
+                            aria-labelledby="continuous-slider"
+                            valueLabelDisplay="on" 
                             min={0} 
                             max={5}
                             />
@@ -232,7 +233,8 @@ function MapComponent() {
                   <Slider 
                             onChange={handleMax} 
                             value={maximum}
-                            aria-labelledby="continuous-slider" 
+                            aria-labelledby="continuous-slider"
+                            valueLabelDisplay="on" 
                             min={0} 
                             max={5}
                             defaultValue={5}

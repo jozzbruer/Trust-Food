@@ -119,6 +119,7 @@ function Reviews(props) {
                         value={stars} 
                         onChange={handleChange} 
                         aria-labelledby="continuous-slider" 
+                        valueLabelDisplay="on"
                         min={0} 
                         max={5}/>
                       </Grid>
