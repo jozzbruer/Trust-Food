@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Reviews(props) {
     const classes = useStyles();
-    const [stars, setStars] = useState(1) 
+    const [stars, setStars] = useState(0) 
     const [comment, setComment] = useState('')
     const [allComments, setAllComments] = useState(props.ratings)
 
@@ -56,7 +56,7 @@ function Reviews(props) {
     function handleSubmit(){
       setAllComments([...allComments, {stars, comment}])
       setComment('')
-      setStars(1)
+      setStars(0)
     }
 
     // Sum of all the stars to calulate the average
@@ -119,7 +119,7 @@ function Reviews(props) {
                         value={stars} 
                         onChange={handleChange} 
                         aria-labelledby="continuous-slider" 
-                        min={1} 
+                        min={0} 
                         max={5}/>
                       </Grid>
                     </Grid>

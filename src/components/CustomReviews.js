@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 function CustomReviews(props) {
     const classes = useStyles();
-    const [rating, setRating] = useState(1) 
+    const [rating, setRating] = useState(0) 
     const [text, setText] = useState([])
     const [allComments, setAllComments] = useState([])
 
@@ -57,7 +57,7 @@ function CustomReviews(props) {
     function handleSubmit(){
       setAllComments([...allComments, {rating, text}])
       setText('')
-      setRating(1)
+      setRating(0)
     }
 
 async function getRestaurantDetails(placeId){
@@ -128,7 +128,7 @@ async function getRestaurantDetails(placeId){
                         value={rating} 
                         onChange={handleChange} 
                         aria-labelledby="continuous-slider" 
-                        min={1} 
+                        min={0} 
                         max={5}/>
                       </Grid>
                     </Grid>

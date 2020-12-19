@@ -68,7 +68,7 @@ function MapComponent() {
     const [open, setOpen] = useState(false)
     const [lat, setlat] = useState(0) // By clicking on the map
     const [long, setLong] = useState() // By clicking on the map
-    const [minimum, setMinimum] = useState(1)
+    const [minimum, setMinimum] = useState(0)
     const [maximum, setMaximum] = useState(5)
     
   useEffect(()=>{
@@ -104,11 +104,7 @@ function MapComponent() {
   function handleSubmit(){
     if(restaurantName !== '' && address !== ''){
       setData([...data,{'id': Math.random().toString(), restaurantName, address, lat,long, 'ratings': [
-        {
-          "stars":1,
-          "comment":"default comments"
-        }
-      ]}])
+      ], 'average': 0}])
       handleClose()
     }
     
@@ -225,7 +221,7 @@ function MapComponent() {
                             onChange={handleMin} 
                             value={minimum}
                             aria-labelledby="continuous-slider" 
-                            min={1} 
+                            min={0} 
                             max={5}
                             />
                   </Grid>
@@ -237,7 +233,7 @@ function MapComponent() {
                             onChange={handleMax} 
                             value={maximum}
                             aria-labelledby="continuous-slider" 
-                            min={1} 
+                            min={0} 
                             max={5}
                             defaultValue={5}
                             />
