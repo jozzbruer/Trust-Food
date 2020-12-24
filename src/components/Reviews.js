@@ -60,10 +60,11 @@ function Reviews(props) {
     }
 
     // Sum of all the stars to calulate the average
-  //  const averageStars =  allComments.reduce((sum, item) =>{  
-  //      sum = (sum + item.stars) 
-  //      return sum / allComments.length 
-  //   }, 0)
+    let average = props.average
+    average =  allComments.reduce((sum, item) =>{  
+       sum = (sum + item.stars) 
+       return sum / allComments.length 
+    }, 0)
 
     function showStars(sum){
       let arr = []
@@ -92,7 +93,7 @@ function Reviews(props) {
                        {props.address}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {showStars(props.average)}
+                        {showStars(average)}
                     </Typography>
                 </CardContent>
                
